@@ -25,9 +25,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
+  <script src="childtyper.js"></script>
 </head>
-<body>
+<body ng-app="childtyper" on-keyup="content = content + $key">
 <h1>Typing Application</h1>
+<p>{{ content }}</p>
 </body>
 </html>
