@@ -23,3 +23,14 @@ app.filter('charCodeToString', function() {
 		return String.fromCharCode( input );
 	}
 });
+
+var Typer = function( $scope ) {
+	$scope.handleKey = function( keyEvent ) {
+		$scope.content = keyEvent.keyCode;
+		$scope.key = keyEvent.key;
+		$scope.char = keyEvent.char;
+	}
+};
+Typer.$inject = [ '$scope' ];
+
+app.controller('Typer', Typer);
