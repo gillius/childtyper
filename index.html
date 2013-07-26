@@ -28,8 +28,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
   <script src="childtyper.js"></script>
 </head>
-<body ng-app="childtyper" on-keyup="content = content + $key">
+<body ng-app="childtyper" ng-keydown="content = $event.keyCode">
 <h1>Typing Application</h1>
-<p>{{ content }}</p>
+<p>You just typed: {{ content }}, which is the letter: {{ content | charCodeToString }}</p>
 </body>
 </html>

@@ -18,13 +18,8 @@
 
 var app = angular.module( 'childtyper', [] );
 
-app.directive( 'onKeyup', function ( $parse ) {
-	return function ( scope, elm, attrs ) {
-		var expr = $parse( attrs.onKeyup );
-		elm.bind( "keyup", function ( e ) {
-			scope.$apply( function () {
-				expr( scope, {$key: e.which } );
-			} );
-		} )
+app.filter('charCodeToString', function() {
+	return function( input ) {
+		return String.fromCharCode( input );
 	}
-} );
+});
