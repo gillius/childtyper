@@ -28,13 +28,25 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
   <script src="childtyper.js"></script>
 </head>
-<body ng-app="childtyper" ng-keydown="handleKey( $event )" ng-controller="Typer">
-<h1>Typing Application</h1>
-<p>You just typed: {{ content }}, which is the letter: {{ content | charCodeToString }}</p>
-<ul>
-  <li>Key: {{ key }}</li>
-  <li>Char: {{ char }}</li>
-</ul>
+<body ng-app="childtyper">
+
+<div ng-controller="MainController">
+  <h1>Typing Application</h1>
+  <div ng-controller="wordController">
+    <p>You are trying to type:<br>{{ word }}</p>
+    <p>You have typed<br>{{ typed }}</p>
+    <p>The next letter to type is: {{ nextLetter }}</p>
+  </div>
+</div>
+
+<div ng-controller="TypeTestController">
+  <h1>Diagnostics</h1>
+  <p>You just typed: {{ content }}, which is the letter: {{ content | charCodeToString }}</p>
+  <ul>
+    <li>Key: {{ key }}</li>
+    <li>Char: {{ char }}</li>
+  </ul>
+</div>
 
 </body>
 </html>
