@@ -1,0 +1,21 @@
+{
+	"comment" : "Images for this application pulled from Wikipedia, credit/license information is below",
+
+	"Apple": {
+		"url": "http://en.wikipedia.org/wiki/File:Red_Apple.jpg",
+		"license": "CC BY 2.0",
+		"licenseUrl": "http://creativecommons.org/licenses/by/2.0/deed.en"
+	},
+
+	"Ball": {
+		"url" : "http://en.wikipedia.org/wiki/File:Baseball_(crop).jpg",
+		"license" : "CC BY-SA 2.0",
+		"licenseUrl" : "http://creativecommons.org/licenses/by-sa/2.0/"
+	},
+
+	"Cat": {
+		"url" : "http://en.wikipedia.org/wiki/File:Kittyply_edit1.jpg",
+		"license" : "CC BY-SA 3.0",
+		"licenseUrl" : "http://creativecommons.org/licenses/by-sa/3.0/deed.en"
+	}
+}

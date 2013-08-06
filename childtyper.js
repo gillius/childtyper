@@ -19,6 +19,12 @@
 (function() {
 	"use strict";
 
+	var words = [
+		"Apple",
+		"Ball",
+		"Cat"
+	];
+
 	var app = angular.module( 'childtyper', [] );
 
 	app.filter('charCodeToString', function() {
@@ -36,34 +42,62 @@
 
 	app.controller('TypeTestController', TypeTestController);
 
-	/**
-	 *
-	 * @param word {string}
-	 */
-	function makeWordController( word ) {
-		function WordController( $scope ) {
-			$scope.word = word;
+	function WordController( $scope ) {
+		//assume $scope.word comes from parent controller; is there a better way to pass that in?
+
+		function onNewWord( word ) {
+			$scope.theWord = word;
 			$scope.nextLetterIdx = 0;
-			$scope.nextLetter = word[$scope.nextLetterIdx];
+			$scope.nextLetter = $scope.theWord[$scope.nextLetterIdx];
 			$scope.typed = "";
-
-			$scope.$on( 'keydown', function( e, keyEvent ) {
-				if ( String.fromCharCode( keyEvent.keyCode ) === $scope.nextLetter.toUpperCase() ) {
-					$scope.typed += $scope.nextLetter;
-					$scope.nextLetterIdx++;
-					$scope.nextLetter = word[$scope.nextLetterIdx];
-				}
-			});
+			$scope.finished = false;
 		}
-		WordController.$inject = [ '$scope' ];
 
-		return WordController;
-	}
+		$scope.$on( 'keydown', function( e, keyEvent ) {
+			if ( $scope.nextLetter !== null &&
+			     String.fromCharCode( keyEvent.keyCode ) === $scope.nextLetter.toUpperCase() ) {
+				$scope.typed += $scope.nextLetter;
+				$scope.nextLetterIdx++;
+				if ( $scope.nextLetterIdx >= $scope.theWord.length ) {
+					$scope.finished = true;
+					$scope.nextLetter = null;
+					$scope.$emit( "WordFinished" );
+				} else {
+					$scope.nextLetter = $scope.theWord[$scope.nextLetterIdx];
+				}
+			}
+		});
 
-	function MainController( $scope ) {
-		$scope.wordController = makeWordController("Apple");
+		$scope.$watch( "word", function(newWord) {
+			onNewWord( newWord );
+		});
 	}
-	MainController.$inject = [ '$scope' ];
+	WordController.$inject = [ '$scope' ];
+
+	app.controller( 'WordController', WordController );
+
+	function MainController( $scope, $timeout ) {
+		var wordPos = 0;
+		$scope.allDone = false;
+
+		function updateWord() {
+			$scope.word = words[wordPos];
+		}
+
+		updateWord();
+
+		$scope.$on( 'WordFinished', function() {
+			++wordPos;
+			if ( wordPos < words.length ) {
+				$timeout( function () {
+					updateWord();
+				}, 1000 );
+			} else {
+				$scope.allDone = true;
+			}
+		});
+	}
+	MainController.$inject = [ '$scope', '$timeout' ];
 
 	app.controller( 'MainController', MainController );
 

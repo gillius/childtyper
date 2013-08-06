@@ -1,0 +1,10 @@
+{
+	"name": "childtyper",
+
+	"dependencies": {
+		"angular" : "PatternConsulting/bower-angular",
+		"bootstrap" : "bootstrap#v3.0.0-rc1"
+	},
+
+	"private": true
+}
