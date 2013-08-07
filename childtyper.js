@@ -50,7 +50,6 @@
 			$scope.nextLetterIdx = 0;
 			$scope.nextLetter = $scope.theWord[$scope.nextLetterIdx];
 			$scope.typed = "";
-			$scope.finished = false;
 		}
 
 		$scope.$on( 'keydown', function( e, keyEvent ) {
@@ -78,7 +77,6 @@
 
 	function MainController( $scope, $timeout ) {
 		var wordPos = 0;
-		$scope.allDone = false;
 
 		function updateWord() {
 			$scope.word = words[wordPos];
@@ -88,13 +86,12 @@
 
 		$scope.$on( 'WordFinished', function() {
 			++wordPos;
-			if ( wordPos < words.length ) {
-				$timeout( function () {
-					updateWord();
-				}, 1000 );
-			} else {
-				$scope.allDone = true;
-			}
+			if ( wordPos >= words.length )
+				wordPos = 0;
+
+			$timeout( function () {
+				updateWord();
+			}, 1000 );
 		});
 	}
 	MainController.$inject = [ '$scope', '$timeout' ];
