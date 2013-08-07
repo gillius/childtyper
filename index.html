@@ -38,11 +38,10 @@
 
 <div ng-controller="MainController">
   <div><img ng-src="images/{{ word }}.jpg"></div>
-  <div ng-controller="WordController">
-    <p>You are trying to type:<br>{{ word }}</p>
-    <p>You have typed<br>{{ typed }}</p>
-    <p>The next letter to type is: {{ nextLetter }}</p>
-    <p ng-show="finished">You are finished!</p>
+  <div ng-controller="WordController" style="margin-left: 2em">
+    <h1>{{ word }}</h1>
+    <h1>{{ typed }}<span style="opacity: 0.3">{{ nextLetter }}</span></h1>
+    <p ng-show="finished">Congratulations you typed the word!</p>
   </div>
 </div>
 

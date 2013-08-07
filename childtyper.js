@@ -50,6 +50,7 @@
 			$scope.nextLetterIdx = 0;
 			$scope.nextLetter = $scope.theWord[$scope.nextLetterIdx];
 			$scope.typed = "";
+			$scope.finished = false;
 		}
 
 		$scope.$on( 'keydown', function( e, keyEvent ) {
